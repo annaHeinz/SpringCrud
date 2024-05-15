@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование</title>
+</head>
+<body>
+<h1>Изменить пользователя</h1>
+<form method="post" th:object="${user}" >
+    <div th:if="${user}">
+        <table>
+            <tr>
+                <td><label for="Name">Имя</label></td>
+                <td><input th:type="text" th:field="${user.name}" id="Name"/></td>
+            </tr>
+            <tr>
+                <td><label for="Age">Возраст</label></td>
+                <td><input th:type="text" th:field="${user.age}" id="Age"/></td>
+            </tr>
+            <tr>
+                <td><label for="City">Город</label></td>
+                <td><input th:type="text" th:field="${user.city}" id="City"/></td>
+            </tr>
+        </table>
+    </div>
+    <input type="submit" value="Изменить"/>
+</form>
+<form method="post" th:if="${allowDelete}" th:action="@{/user/delete/{id}(id=${user.id})}" th:object="${user}">
+    <input type="submit" value="Удалить пользователя"/>
+</form>
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error">
+    ...
+</div>
+</body>
+</html>
